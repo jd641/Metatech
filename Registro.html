@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plataforma Metatech</title>
+    <style>
+        @import url('contenido/Kanit-Regular.ttf');
+        @import url(https://fonts.googleapis.com/css?family=Gruppo);
+        * {
+            --Dark_main_color: #282F32;
+            --Dark_secondary_color: #929DAD;
+            --Main_color: #3684DB;
+            --Input_color: #323644;
+            font-family: 'kanit';
+            color: white;
+            user-select: none;
+        }
+
+        a {
+            color: #1D84E0;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+        body {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            align-content: center;
+            justify-content: end;
+            margin: unset;
+            align-items: end;
+            background: var(--Dark_main_color);
+        }
+
+        .Rad_bg {
+            z-index: -1;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url(contenido/Semi_Fondo_1.jpg) no-repeat;
+            background-size: 800px 451px;
+            transition: opacity 3s linear;
+            opacity: 1;
+            width: 800px;
+            height: 451px;
+        }
+
+        .Rad_bg::after {
+            content: '';
+            position: absolute;
+            background: radial-gradient(at top left, transparent, var(--Dark_main_color) 70%) no-repeat;
+            width: inherit;
+            height: inherit;
+        }
+
+        .Logo_cont {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            &.anim_1 {
+                .Circ {
+                    stroke-dashoffset: 0;
+                }
+            }
+            &.anim_2 {
+                .Circ {
+                    stroke-dashoffset: 300;
+                }
+            }
+        }
+
+        .Circ {
+            stroke-dashoffset: -300;
+            stroke-dasharray: 300 400;
+            transition: 3s linear;
+        }
+
+        .Main_cont {
+            display: grid;
+            width: 50vw;
+            margin-right: 5vw;
+            align-self: center;
+        }
+
+        .Title {
+            margin: unset;
+            font-size: 50px;
+        }
+
+        .Title::after {
+            content: '.';
+            color: var(--Main_color);   
+        }
+
+        .parr_ini_ses {
+            text-align: end;
+        }
+
+        .Data_cont {
+            display: grid;
+            grid-template-areas:
+                "a a"
+                "b b"
+                "c c"
+                "d e";
+        }
+
+        .Data_cont input, .Data_cont button {
+            min-height: 40px;
+            margin: 15px 0px;
+            border-radius: 16px;
+            border: transparent;
+        }
+        
+        .Data_cont input {
+            background-color: var(--Input_color);
+            padding-left: 15px;
+        }
+
+        .Data_cont button {
+            color: var(--Dark_main_color);
+            font-size: 1em;
+        }
+
+        .Cancel {
+            background-color: var(--Dark_secondary_color);
+            margin-right: 1vw !important;
+        }
+
+        .Create {
+            background-color: var(--Main_color);
+            margin-left: 1vw !important;
+        }
+
+        input::placeholder {
+            font-size: 70%;
+        }
+
+        input {
+            width: 100%;
+            border: 2px solid var(--Input_color) !important;
+            transition: all 0.25s ease-in-out;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus {
+            border: 2px solid var(--Main_color) !important;
+        }
+
+
+        .Data_cont > span {
+            user-select: none;
+            margin: 23px 0px 0px 16px;
+            color: var(--Dark_secondary_color);
+            pointer-events: none;
+            transition: all 0.25s ease-in-out;
+        }
+        
+        .Data_cont .Name:focus ~ .Name_placeholder, .Data_cont .Name:not(:focus):valid ~ .Name_placeholder,
+        .Data_cont .E-Mail:focus ~ .E-Mail_placeholder, .Data_cont .E-Mail:not(:focus):valid ~ .E-Mail_placeholder,
+        .Data_cont .Password:focus ~ .Password_placeholder, .Data_cont .Password:not(:focus):valid ~ .Password_placeholder {
+            margin: -10px 0px 0px 16px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="Rad_bg"></div>
+    <div class="Logo_cont">
+        <svg width="180" height="102" viewbox="-1 -1 180 101">
+            <path class="Circ" d="M96 70A1 1 0 0096 70C90 84 74 100 50 100 24 100 0 79 0 50 0 21 24 0 50 0 74 0 90 16 96 30" fill="transparent" stroke="var(--Main_color)" stroke-width="2px"></path>
+            <text fill="var(--Main_color)" y="56px" x="42px" font-size="32px" font-weight="3" style="font-family:'Gruppo'" font-variant="petite-caps">metatech</text>
+        </svg>
+    </div>
+    <div class="Main_cont">
+        <h1 class="Title">Crea tu cuenta</h1>
+        <p class="parr_ini_ses">O si ya tienes una, <a href="Inicio Sesión.html">Inicia sesión.</a></p>
+        <div class="Data_cont">
+            <input style="grid-area: a;" class="Name" required=""></input>
+            <span style="grid-area: a;" class="Name_placeholder">Nombres y apellidos</span>
+            <input style="grid-area: b;" class="E-Mail" required=""></input>
+            <span style="grid-area: b;" class="E-Mail_placeholder">Correo electrónico</span>
+            <input style="grid-area: c;" type="password" maxlength="8" class="Password" required=""></input>
+            <span style="grid-area: c;" class="Password_placeholder">Contraseña</span>
+            <button style="grid-area: d;" class="Cancel">Cancelar</button>
+            <button style="grid-area: e;" class="Create" onclick="location.href='Inicio Sesión.html'">Crear cuenta</button>
+        </div>
+    </div>
+
+    <script>
+
+        let persistencia_logo = 18000;
+
+        function main() {
+            function animationStart() { 
+                document.getElementsByClassName('Logo_cont')[0].classList.add('anim_1');
+                document.getElementsByClassName('Logo_cont')[0].classList.remove('anim_2');
+            }
+
+            function animationRestart() {
+                document.getElementsByClassName('Logo_cont')[0].classList.remove('anim_1');
+                document.getElementsByClassName('Logo_cont')[0].classList.add('anim_2');
+                setTimeout(main, 5000) /*Recall*/
+                console.log('reiniciando...')
+            }
+
+            animationStart(); /*Inicio, + 3s de transic.*/
+            setTimeout(animationRestart, persistencia_logo); /*Reseteo a los 18s + 3s de transic.*/
+        };
+        
+
+
+        let iterador = 1;
+
+
+        function bg_change() {
+            let Bg = document.getElementsByClassName('Rad_bg')[0]
+            
+            Bg.style.opacity = '0'
+
+            if (iterador == 0) {
+                setTimeout(() => {
+                    Bg.style.backgroundImage = 'url(contenido/Semi_Fondo_1.jpg)'
+                    Bg.style.opacity = '1'
+                    iterador += 1;
+                }, 3000);
+            }
+            
+            else if (iterador == 1) {
+                setTimeout(() => {
+                    Bg.style.backgroundImage = 'url(contenido/Semi_Fondo_2.jpg)'
+                    Bg.style.opacity = '1'
+                    iterador += 1;
+                }, 3000);
+            }
+
+            else {
+                setTimeout(() => {
+                    Bg.style.backgroundImage = 'url(contenido/Semi_Fondo_3.jpg)'
+                    Bg.style.opacity = '1'
+                    iterador = 0;
+                }, 3000);
+            }
+            
+
+            setTimeout(bg_change, 15000)
+        }
+
+
+        setTimeout(bg_change, 15000);
+
+        /*main() no implementada por ahora*/
+
+
+    </script>
+</body>
+</html>

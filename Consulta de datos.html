@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plataforma Metatech</title>
+    <style>
+        @import url('contenido/Kanit-Regular.ttf');
+        @import url(https://fonts.googleapis.com/css?family=Gruppo);
+        * {
+            --Dark_main_color: #282F32;
+            --Dark_secondary_color: #929DAD;
+            --Main_color: #3684DB;
+            --Input_color: #323644;
+            --Whatsapp_color: #2CB742;
+            font-family: 'kanit';
+            color: white;
+            user-select: none;
+        }
+
+        a {
+            color: white;
+            text-decoration: unset;
+            height: min-content;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        html {
+          background: var(--Dark_main_color);
+        }
+
+        h2 {
+          margin: unset;
+          font-size: 1.875vw;
+        }
+
+        body {
+            margin: unset;
+            width: 100vw;
+            height: 100vh;
+            align-items: end;
+            background: var(--Dark_main_color);
+            overflow: hidden;
+        }
+
+        .Main_cont {
+            background-color: var(--Dark_main_color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: calc(100vw - 40px);
+            display: flex;
+            justify-content: space-between;
+            padding: 1.6vw;
+            max-height: 30px;
+            z-index: 2;
+            font-size: 1.35vw;
+            white-space: pre;
+        }
+
+        .Main_cont a {
+            position: relative;
+            top: 2px;
+        }
+
+        .Main_cont > svg > path {
+            stroke-dashoffset: 360;
+            stroke-dasharray: 360;
+        }
+
+        .Comunicate {
+            background: var(--Whatsapp_color);
+            border-radius: 20px;
+            border: 0px;
+            display: grid;
+            height: fit-content;
+            padding: 5px 10px;
+            margin-right: 19px;
+        }
+
+        .Comunicate span {
+            color: black;
+            align-content: center;
+        }
+        
+        .Comunicate svg {
+            grid-column: 2;
+            margin-left: 10px;
+            align-self: center;
+        }
+
+        .Cont_align {
+            position: relative;
+            top: 70px;
+            height: calc(100% - 5vw);
+            display: flex;
+        }
+
+        .Selector_bg {
+            height: 3vw;
+            position: absolute;
+            top: 5vw;
+            background: var(--Dark_secondary_color);
+            width: inherit;
+            border-radius: 20px 0 0 20px;
+            transition: top 0.5s ease-in-out;
+        }
+        
+        .Selector_bg::before {
+            background-image: url("data:image/svg+xml,%3Csvg id='Capa_1' data-name='Capa 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %23929DAD%3B %7D %3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='m13.11 49.5c20.78-3.42 32.96-15.61 36.39-36.39v36.39H13.11Z'/%3E%3Cpath class='cls-1' d='m49 17.72v31.28h-31.28c16.56-4.15 27.13-14.72 31.28-31.28m1-17.72c0 33-17 50-50 50h50V0h0Z'/%3E%3C/svg%3E");
+            top: -2.4vw;
+        }
+        
+        .Selector_bg::after {
+            background-image: url("data:image/svg+xml,%3Csvg id='Capa_1' data-name='Capa 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %23929DAD%3B %7D %3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='m49.5 36.88C46.08 16.11 33.89 3.92 13.11.5h36.39v36.38Z'/%3E%3Cpath class='cls-1' d='m49 1v31.28C44.85 15.72 34.28 5.15 17.72 1h31.28m1-1H0c33 0 50 17 50 50V0h0Z'/%3E%3C/svg%3E");
+            top: 3vw;
+        }    
+        
+        .Selector_bg::before, .Selector_bg::after {
+            content: '';
+            width: 2.5vw;
+            height: 2.5vw;
+            display: block;
+            position: absolute;
+            right: 0;
+        }
+
+        .Drop_menu {
+            position: absolute;
+            width: inherit;
+        }
+
+        .Drop_menu a {
+            display: block;
+            height: 3vw;
+            padding-left: 2vw;
+            margin: 0 0 1vw 0;
+            align-content: center;
+        }
+        
+        .Drop_menu a span {
+            color: white;
+            font-size: 1.5vw;
+            display: block;
+            width: 100%;
+            border: none;
+            
+        }
+
+        
+        .Sidebar {
+            padding: 5vw 0vw 0vw 5vw;
+            overflow-x: hidden;
+            background-color: var(--Dark_main_color);
+            width: 25vw;
+            height: calc(100% - 5vw);
+        }
+
+        .Sidebar button {
+            background: var(--Dark_secondary_color);
+            font-size: 1.2vw;
+            height: 3vw;
+        }
+        
+        .User_cont {
+            width: 70%;
+            background: var(--Dark_secondary_color);
+        }
+
+        .Data_cont {
+            opacity: 0;
+            width: calc(100% - 6vw);
+            margin: 3vw;
+            border-radius: 2.5vw;
+            background: white;
+            display: flex;
+        }
+
+        .User_photo {
+            height: 10vw;
+            min-width: 10vw;
+            background: var(--Main_color);
+            border-radius: 13vw;
+            margin: 3vw;
+        }
+
+        .Edit_icon {
+            width: 2.2vw;
+            position: absolute;
+            right: 6vw;
+            top: 6vw
+        }
+
+        .Editable_data {
+            display: grid;
+            width: inherit;
+            margin: 3vw 0;
+        }
+        
+        .Editable_data span {
+            color: black;
+            min-width: fit-content;
+            height: fit-content;
+            font-size: 1.25vw;
+        }
+        
+        .Editable_data input {
+            color: black;
+            margin: 1vw 3vw;
+            width: 200%;
+            font-size: 1.25vw;
+            border: unset;
+            border-bottom: 1px black solid;
+            background: unset;
+        }
+        
+        .Editable_data div:first-child input {
+            margin: 0 8vw 1vw 0;
+        }
+
+        .Editable_data div {
+            display: flex;
+            align-items: center;
+        }
+
+        .Editable_data div::after {
+            content: '';
+            background: rgba(100, 100, 100, 0.5);
+            width: var(--Dinamic_width);
+            display: var(--Toggle_disp, block);
+            height: 2vw;
+            position: absolute;
+            right: 6vw;
+        }
+
+        .Editable_data div:first-child::after {
+            right: 11vw;
+            margin-bottom: 1vw;
+        }
+
+        .Editable_data input:focus {
+            outline: unset;
+            border-bottom: 1px red solid;
+        }
+
+        .Editable_data input:first-child {
+            margin: 1vw 3vw 1vw 0;
+        }
+    </style>
+</head>
+<body onresize="Resize_data_mod()">
+    <div class="Main_cont">
+        <svg height="30" viewBox="43 35 132 30">
+            <text fill="var(--Main_color)" y="56px" x="42px" font-size="32px" font-weight="3" style="font-family:'Gruppo'" font-variant="petite-caps">metatech</text>
+        </svg>
+        <a>Mis datos</a>
+        <a href="solicitar servicio.html">Solicitar servicios</a>
+        <a href="Inicio Sesión.html">Cerrar sesión</a>
+        <button class="Comunicate"><span>Comunicate con nosotros</span><svg width="18" height="18" viewbox="0 0 308 308">
+            <path d="M227.904,176.981c-0.6-0.288-23.054-11.345-27.044-12.781c-1.629-0.585-3.374-1.156-5.23-1.156
+                c-3.032,0-5.579,1.511-7.563,4.479c-2.243,3.334-9.033,11.271-11.131,13.642c-0.274,0.313-0.648,0.687-0.872,0.687
+                c-0.201,0-3.676-1.431-4.728-1.888c-24.087-10.463-42.37-35.624-44.877-39.867c-0.358-0.61-0.373-0.887-0.376-0.887
+                c0.088-0.323,0.898-1.135,1.316-1.554c1.223-1.21,2.548-2.805,3.83-4.348c0.607-0.731,1.215-1.463,1.812-2.153
+                c1.86-2.164,2.688-3.844,3.648-5.79l0.503-1.011c2.344-4.657,0.342-8.587-0.305-9.856c-0.531-1.062-10.012-23.944-11.02-26.348
+                c-2.424-5.801-5.627-8.502-10.078-8.502c-0.413,0,0,0-1.732,0.073c-2.109,0.089-13.594,1.601-18.672,4.802
+                c-5.385,3.395-14.495,14.217-14.495,33.249c0,17.129,10.87,33.302,15.537,39.453c0.116,0.155,0.329,0.47,0.638,0.922                  
+                c17.873,26.102,40.154,45.446,62.741,54.469c21.745,8.686,32.042,9.69,37.896,9.69c0.001,0,0.001,0,0.001,0
+                c2.46,0,4.429-0.193,6.166-0.364l1.102-0.105c7.512-0.666,24.02-9.22,27.775-19.655c2.958-8.219,3.738-17.199,1.77-20.458
+                C233.168,179.508,230.845,178.393,227.904,176.981z"/>
+            <path d="M156.734,0C73.318,0,5.454,67.354,5.454,150.143c0,26.777,7.166,52.988,20.741,75.928L0.212,302.716
+                c-0.484,1.429-0.124,3.009,0.933,4.085C1.908,307.58,2.943,308,4,308c0.405,0,0.813-0.061,1.211-0.188l79.92-25.396
+                c21.87,11.685,46.588,17.853,71.604,17.853C240.143,300.27,308,232.923,308,150.143C308,67.354,240.143,0,156.734,0z
+                M156.734,268.994c-23.539,0-46.338-6.797-65.936-19.657c-0.659-0.433-1.424-0.655-2.194-0.655c-0.407,0-0.815,0.062-1.212,0.188
+                l-40.035,12.726l12.924-38.129c0.418-1.234,0.209-2.595-0.561-3.647c-14.924-20.392-22.813-44.485-22.813-69.677
+                c0-65.543,53.754-118.867,119.826-118.867c66.064,0,119.812,53.324,119.812,118.867
+                C276.546,215.678,222.799,268.994,156.734,268.994z"/>
+            </svg>
+        </button>
+    </div>
+    <div class="Cont_align">
+        <div class="Sidebar">
+            <div class="Selector_bg"></div>
+            <div class="Drop_menu">
+                <a><span>Datos personales</span></a>
+                <a><span>Datos de contacto</span></a>
+                <a><span>Métodos de pago</span></a>
+            </div>
+        </div>
+        <div class="User_cont">
+            <div class="Data_cont">
+                <svg class="User_photo" fill="none" height="24" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="-12 -12 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+                <svg onclick="Toggle_data_mod()" class="Edit_icon" viewBox="0 0 785 775" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M701.3 576.7c0 82.2-66.8 149-149 149H192.9c-82.2 0-149-66.8-149-149V217.4c0-82.2 66.8-149 149-149h129.8v-42.7H192.9c-105.7 0-191.7 86-191.7 191.7v359.3c0 105.7 86 191.7 191.7 191.7h359.3c105.7 0 191.7-86 191.7-191.7V446.9h-42.7v129.8z"/>
+                    <path d="M756.7 34.4c-22.9-22.9-53-34.4-83.1-34.4s-60.1 11.5-83.1 34.4L179 445.9c-16.9 16.9-27.9 38.8-31.2 62.5l-19 132.8c-1.6 11.4 7.3 21.3 18.4 21.3.9 0 1.8-.1 2.7-.2l132.8-19c23.7-3.4 45.6-14.3 62.5-31.2l411.5-411.5c45.9-45.9 45.9-120.3 0-166.2zM229 456.3 577.3 108 683 213.8 334.8 562.1 229 456.3zM276.7 601l-101.1 14.4L190 514.3c1.4-9.5 4.8-18.7 9.9-26.7L303.3 591c-8 5.2-17.1 8.7-26.6 10zm449.8-430.7-13.3 13.3-105.7-105.8 13.3-13.3c14.1-14.1 32.9-21.9 52.9-21.9s38.8 7.8 52.9 21.9c29.1 29.2 29.1 76.7-.1 105.8z"/>
+                </svg>
+                <div class="Editable_data">
+                    <div>
+                        <input type="text"/>
+                    </div>
+                    <div>
+                        <span>Tipo de usuario</span><input type="text"/>
+                    </div>
+                    <div>
+                        <span>Edad</span><input type="text"/>
+                    </div>
+                    <div>
+                        <span>Fecha de nacimiento</span><input type="text"/>                
+                    </div>
+                    <div>
+                        <span>Servicios registrados</span><input type="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="Data_cont"><span style="color: black; margin: 3vw; font-style: italic;">En proceso...</span></div>
+            <div class="Data_cont"><span style="color: black; margin: 3vw; font-style: italic;">En proceso...</span></div>
+        </div>
+    </div>
+    <script>
+        let Cont = document.getElementsByClassName('Drop_menu')[0];
+        let Background = document.getElementsByClassName('Selector_bg')[0];
+        let Input_cover = document.getElementsByClassName('Editable_data')[0];
+        let Displayer_1 = document.getElementsByClassName('Data_cont')[0];
+        let Displayer_2 = document.getElementsByClassName('Data_cont')[1];
+        let Displayer_3 = document.getElementsByClassName('Data_cont')[2];
+
+        let Dinamic_width;
+        let Width_cont = [];
+        let Toggle_mod = 0;
+        let Selector = 0;
+        let Sidebar_item = 0;
+        let Elem_selec_anterior = Cont.children[0].children[0];
+
+        Cont.children[0].children[0].style = "color: var(--Dark_main_color);";
+        Displayer_1.style = "opacity: 1;";
+
+        for(let i = 0; i < Input_cover.children.length; i++) {
+            Input_cover.children[i].style = "--Dinamic_width: " + Width_cont[i] + "px;" + '--Toggle_disp: none;';
+            if (i == 0){
+                Input_cover.children[i].children[0].setAttribute('tabindex', '-1');
+            }
+            else {
+                Input_cover.children[i].children[1].setAttribute('tabindex', '-1');
+            }
+        }
+
+
+        function Width_assign() {
+            Width_cont = [];
+            for(let i = 0; i < Input_cover.children.length; i++) {
+                if(i == 0) {
+                    Width_cont.push(Input_cover.children[i].children[0].offsetWidth)
+                }
+                else {
+                    Width_cont.push(Input_cover.children[i].children[1].offsetWidth)
+                }
+                Input_cover.children[i].style = "--Dinamic_width: " + Width_cont[i] + "px;";
+            }
+        }
+
+        
+        Width_assign();
+        
+        
+        function Toggle_data_mod() {
+
+            Width_assign();
+
+            if(Toggle_mod == 0) {
+                Toggle_mod = 1
+                for(let i = 0; i < Input_cover.children.length; i++) {
+                    Input_cover.children[i].style = "--Dinamic_width: " + Width_cont[i] + "px;" + '--Toggle_disp: none;';
+                    if (i == 0){
+                        Input_cover.children[i].children[0].setAttribute('tabindex', '');
+                    }
+                    else {
+                        Input_cover.children[i].children[1].setAttribute('tabindex', '');
+                    }
+                }
+                
+            }
+            else {
+                Toggle_mod = 0
+                for(let i = 0; i < Input_cover.children.length; i++) {
+                    Input_cover.children[i].style = "--Dinamic_width: " + Width_cont[i] + "px;" + '--Toggle_disp: block;';
+                    if (i == 0){
+                        Input_cover.children[i].children[0].setAttribute('tabindex', '-1');
+                    }
+                    else {
+                        Input_cover.children[i].children[1].setAttribute('tabindex', '-1');
+                    }
+                }
+            }
+        }
+
+        function Resize_data_mod() {
+            Width_assign();
+
+            for(let i = 0; i < Input_cover.children.length; i++) {
+                    Input_cover.children[i].style = "--Dinamic_width: " + Width_cont[i] + "px;" + '--Toggle_disp: block;';
+                }
+        }
+
+
+        
+        while (Selector < Cont.children.length){
+            Cont.children[Selector].setAttribute('onclick', "Main(" + Selector + ")");
+            Selector += 1
+        }
+        
+        function Main(id) {
+            console.log(id);
+            Background.style.top = (id * 4) + 5 + "vw";
+            
+            Elem_selec_anterior.style = "transition: color 0.5s ease-in-out;"
+            Cont.children[id].children[0].style = "color: var(--Dark_main_color); transition: color 0.5s ease-in-out;"
+            Elem_selec_anterior = Cont.children[id].children[0];
+
+            if(id == 0) {
+                Displayer_3.style = "display: none; opacity: 0;";
+                Displayer_2.style = "display: none; opacity: 0;";
+                Displayer_1.style = "opacity: 1;";
+            }
+            
+            else if (id == 1) {
+                Displayer_3.style = "display: none; opacity: 0;";
+                Displayer_2.style = "opacity: 1;";
+                Displayer_1.style = "display: none; opacity: 0;";
+            }
+            else {
+                Displayer_3.style = "opacity: 1;";
+                Displayer_2.style = "display: none; opacity: 0;";
+                Displayer_1.style = "display: none; opacity: 0;";
+            }
+        }
+        
+        
+
+
+
+
+
+        setTimeout(() => {
+            for(let i = 0; i < document.getElementsByTagName('input').length; i++) {
+                document.getElementsByTagName('input')[i].style = "transition: border-bottom 1s ease-in-out;"
+            }
+        }, 1);
+
+        document.getElementsByTagName('input')[0].value = "[Nombre de usuario]"
+        document.getElementsByTagName('input')[1].value = "[Tipo de cliente]"
+        document.getElementsByTagName('input')[2].value = "[Edad usuario]"
+        document.getElementsByTagName('input')[3].value = "[Fecha nacimiento usuario]"
+        document.getElementsByTagName('input')[4].value = "[Cantidad de servicios registrados]"
+
+
+
+
+    </script>
+</body>
+</html>
